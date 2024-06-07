@@ -15,7 +15,7 @@ function preload() {
 function setup() {
   createCanvas(BG_DIM, BG_DIM);
 
-  positions.kid = getPosition();
+  positions.kid = [BG_DIM / 2, BG_DIM / 2];
   newPositionForObject("popsicle");
   newPositionForObject("ball");
 }
@@ -26,9 +26,11 @@ function draw() {
 
   if (positions?.popsicle) {
     image(sprites.popsicle, ...positions.popsicle, IMG_DIM, IMG_DIM);
+    collision("popsicle");
   }
   if (positions?.ball) {
     image(sprites.ball, ...positions.ball, IMG_DIM, IMG_DIM);
+    collision("ball");
   }
   image(sprites.kid, ...positions.kid, IMG_DIM, IMG_DIM);
   move();
@@ -75,4 +77,16 @@ function move() {
 
   positions.kid[0] = constrain(x, 0, BG_DIM);
   positions.kid[1] = constrain(y, 0, BG_DIM);
+}
+
+function hasCollision(object) {
+  const [kidX, kidY] = positions.kid;
+  const [objX, objY] = positions[object];
+  return Math.abs(kidX - objX) <= IMG_DIM && Math.abs(kidY - objY) <= IMG_DIM;
+}
+
+function collision(object) {
+  if (hasCollision(object)) {
+    positions[object] = newPositionForObject(object);
+  }
 }
