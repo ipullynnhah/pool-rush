@@ -14,11 +14,14 @@ function preload() {
 
 function setup() {
   createCanvas(BG_DIM, BG_DIM);
+
+  positions.kid = getPosition();
 }
 
 function draw() {
   background(16, 87, 107);
   drawPool();
+  image(sprites.kid, ...positions.kid, IMG_DIM, IMG_DIM);
 }
 
 function drawPool() {
@@ -27,4 +30,27 @@ function drawPool() {
       image(sprites.pool, x, y, IMG_DIM, IMG_DIM);
     }
   }
+}
+
+function randint(start, stop) {
+  return Math.floor(Math.random() * (stop - start)) + start;
+}
+
+function getPosition() {
+  return [
+    randint(0, BG_DIM / IMG_DIM) * IMG_DIM,
+    randint(0, BG_DIM / IMG_DIM) * IMG_DIM
+  ];
+}
+
+function newPositionForObject(object) {
+  if (intervals[object]) {
+    clearInterval(intervals[object]);
+  }
+  intervals[object] = setInterval(() => {
+    positions[object] = getPosition();
+    setTimeout(() => {
+      positions[object] = [-IMG_DIM, -IMG_DIM];
+    }, 5000);
+  }, randint(6, 10) * 1000);
 }
