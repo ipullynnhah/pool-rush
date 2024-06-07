@@ -18,4 +18,13 @@ function setup() {
 
 function draw() {
   background(16, 87, 107);
+  drawPool();
+}
+
+function drawPool() {
+  for (let x = 0; x < BG_DIM; x += IMG_DIM) {
+    for (let y = 0; y < BG_DIM; y += IMG_DIM) {
+      image(sprites.pool, x, y, IMG_DIM, IMG_DIM);
+    }
+  }
 }
