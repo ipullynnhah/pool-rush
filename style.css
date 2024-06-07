@@ -1,0 +1,17 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #21444e;
+  display: grid;
+  place-items: center;
+}
+
+canvas {
+  display: block;
+  border-radius: 25px;
+}
