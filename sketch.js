@@ -16,11 +16,20 @@ function setup() {
   createCanvas(BG_DIM, BG_DIM);
 
   positions.kid = getPosition();
+  newPositionForObject("popsicle");
+  newPositionForObject("ball");
 }
 
 function draw() {
   background(16, 87, 107);
   drawPool();
+
+  if (positions?.popsicle) {
+    image(sprites.popsicle, ...positions.popsicle, IMG_DIM, IMG_DIM);
+  }
+  if (positions?.ball) {
+    image(sprites.ball, ...positions.ball, IMG_DIM, IMG_DIM);
+  }
   image(sprites.kid, ...positions.kid, IMG_DIM, IMG_DIM);
 }
 
