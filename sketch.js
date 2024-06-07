@@ -31,6 +31,7 @@ function draw() {
     image(sprites.ball, ...positions.ball, IMG_DIM, IMG_DIM);
   }
   image(sprites.kid, ...positions.kid, IMG_DIM, IMG_DIM);
+  move();
 }
 
 function drawPool() {
@@ -62,4 +63,16 @@ function newPositionForObject(object) {
       positions[object] = [-IMG_DIM, -IMG_DIM];
     }, 5000);
   }, randint(6, 10) * 1000);
+}
+
+function move() {
+  let [x, y] = positions.kid;
+
+  if (keyIsDown(LEFT_ARROW)) x -= IMG_DIM * 0.05;
+  else if (keyIsDown(RIGHT_ARROW)) x += IMG_DIM * 0.05;
+  else if (keyIsDown(UP_ARROW)) y -= IMG_DIM * 0.05;
+  else if (keyIsDown(DOWN_ARROW)) y += IMG_DIM * 0.05;
+
+  positions.kid[0] = constrain(x, 0, BG_DIM);
+  positions.kid[1] = constrain(y, 0, BG_DIM);
 }
